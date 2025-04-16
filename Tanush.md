@@ -80,12 +80,29 @@ No Config class was defined for User model for proper MongoDB integration.
 ### Solution 6: Models Fixes
 Enhanced models.py by: making bio field optional in UserBase, implementing UserCreate with password field, creating complete User model with MongoDB ID handling, adding created_at timestamp, and configuring proper JSON encoding for ObjectId.
 
+## 7. MongoDB Connection Issues
+
+### Problem 7.1: Asynchronous MongoDB Client Error
+MongoDB client showing "AttributeError: type object 'MongoClient' has no attribute 'bulk_write'" when using motor async client.
+
+### Problem 7.2: Relative Import Issues
+Main.py using relative imports that caused errors when running the application.
+
+### Problem 7.3: Database Connection Management
+No proper startup and shutdown handling for the MongoDB connection.
+
+### Solution 7: Database and API Configuration Fixes
+Fixed MongoDB issues by: switching to synchronous pymongo client, implementing proper connection management with FastAPI events, adding error handling for database operations, and converting database access to use app state.
+
 ## Summary of Changes
 
-1. **Backend (`quiz.py`, `items.py` & `models.py`):**
+1. **Backend (`quiz.py`, `items.py`, `models.py`, `db.py` & `main.py`):**
    - Fixed router configurations, endpoint methods, and implemented proper random question selection
    - Created complete data models with proper MongoDB integration
    - Added appropriate validation and field definitions
+   - Improved database connection handling with proper lifecycle management
+   - Fixed import structure to use absolute imports
+   - Added proper error handling for database operations
 
 2. **Frontend JavaScript (`quiz.js` & `items.js`):**
    - Fixed API communication issues with proper error handling
