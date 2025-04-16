@@ -3,7 +3,6 @@ import random
 
 router = APIRouter(prefix="/quiz", tags=["quiz"])
 
-# I actually could have added this to a collection in mongodb
 questions = [
     {
         "id": 1,
