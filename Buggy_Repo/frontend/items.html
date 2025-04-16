@@ -12,8 +12,19 @@
     <a href="profile.html">Profile</a>
     <a href="analytics.html">Analytics</a>
     <a href="news.html">News</a>
+    <a href="quiz.html">Quiz</a>
   </nav>
-  <!-- fuck I think I deleted a container, god help me-->
+  <div class="container">
+    <h1>📦 Items</h1>
+    <form id="itemForm">
+      <input type="text" id="name" placeholder="Item Name" required />
+      <input type="text" id="description" placeholder="Description" required />
+      <button type="submit">Add Item</button>
+    </form>
+    <p id="itemCount">Total items: 0</p>
+    <input type="text" id="search" placeholder="Search items..." />
+    <ul id="itemList"></ul>
+  </div>
 
   <script src="scripts/items.js"></script>
 </body>

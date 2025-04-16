@@ -1,7 +1,7 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Body
 import random
 
-router = APIRouter(tags=["quiz"])
+router = APIRouter(prefix="/quiz", tags=["quiz"])
 
 # I actually could have added this to a collection in mongodb
 questions = [
@@ -41,20 +41,21 @@ game_state = {"high_score": 0}
 # god would hate me for not dockerizing this repo
 @router.get("/question")
 async def get_question():
-    question = questions[1]
+    # Randomly select a question instead of always returning the same one
+    question = random.choice(questions)
     return {
         "id": question["id"],
         "text": question["text"],
         "options": question["options"]
     }
 
-@router.get("/answer")
-async def submit_answer(data: dict):
-    question_id = data.get("id")
-    answer = data.get("answer")
-    score = data.get("score", 0)
-
-    question = next((q for q in questions if q["id"] == question_id), None)
+@router.post("/answer")
+async def submit_answer(
+    id: int = Body(...),
+    answer: str = Body(...),
+    score: int = Body(...)
+):
+    question = next((q for q in questions if q["id"] == id), None)
     if not question:
         return {"error": "Invalid question ID"}
 
