@@ -23,6 +23,22 @@ async function loadUsers() {
   });
 }
 
+// Load all users
+async function loadUsers() {
+  try {
+    const response = await fetch(`${baseURL}/users`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch users: ${response.status}`);
+    }
+    const users = await response.json();
+    renderUsers(users);
+  } catch (error) {
+    console.error("Error loading users:", error);
+    document.getElementById("userCount").textContent = "Failed to load users";
+  }
+}
+
+
 document.getElementById("search").addEventListener("input", async (e) => {
   const term = e.target.value.toLowerCase();
   const res = await fetch(`${baseURL}/users`);
