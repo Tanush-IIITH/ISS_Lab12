@@ -26,39 +26,46 @@
 
 ### Add the names of the members and roll numbers of your team below
 
-- Name : Roll Number
+- Tanush : 2024101013
+- Dhruv : 2024111011
+- Arushi : 2024101075
+- Rishabh : 2024101070
+- Keshav : 2024101051
 
 ### Table to keep track
 
 | ID  | Issue Description                        | Identified By | Fixed By     |
 |-----|------------------------------------------|---------------|--------------|
-| 1   | Style.css is not filled                                    |         Narain |     Whole Team     |
-| 2   |                                          |               |              |
-| 3   |                                          |               |              |
-| 4   |                                          |               |              |
-| 5   |                                          |               |              |
-| 6   |                                          |               |              |
-| 7   |                                          |               |              |
-| 8   |                                          |               |              |
-| 9   |                                          |               |              |
-| 10  |                                          |               |              |
-| 11  |                                          |               |              |
-| 12  |                                          |               |              |
-| 13  |                                          |               |              |
-| 14  |                                          |               |              |
-| 15  |                                          |               |              |
-| 16  |                                          |               |              |
-| 17  |                                          |               |              |
-| 18  |                                          |               |              |
-| 19  |                                          |               |              |
-| 20  |                                          |               |              |
-| 21  |                                          |               |              |
-| 22  |                                          |               |              |
-| 23  |                                          |               |              |
-| 24  |                                          |               |              |
-| 25  |                                          |               |              |
-| 26  |                                          |               |              |
-| 27  |                                          |               |              |
-| 28  |                                          |               |              |
-| 29  |                                          |               |              |
-| 30  |                                          |               |              |
+| 1   | Style.css is not filled                  | Narain        | Whole Team   |
+| 2   | quiz.py: Always returning same question  | Tanush        | Tanush       |
+| 3   | quiz.py: HTTP Method Mismatch (GET vs POST) | Tanush     | Arushi       |
+| 4   | quiz.py: Improper parameter extraction   | Tanush        | Arushi       |
+| 5   | quiz.js: Frontend/backend method mismatch| Tanush        | Tanush       |
+| 6   | quiz.js: Double request issue            | Tanush        | Tanush       |
+| 7   | Navigation inconsistency across HTML files| Tanush       | Tanush       |
+| 8   | items.html: Missing container div        | Tanush        | Tanush       |
+| 9   | profile.html: Incorrect script path      | Rishabh       | Rishabh      |
+| 10  | items.py: Incorrect router initialization| Keshav        | Keshav       |
+| 11  | items.py: Duplicate POST handlers        | Keshav        | Keshav       |
+| 12  | items.py: Incorrect delete endpoint      | Keshav        | Keshav       |
+| 13  | items.js: Content-Type mismatch          | Dhruv         | Dhruv        |
+| 14  | items.js: Incorrect function name        | Dhruv         | Dhruv        |
+| 15  | models.py: Incomplete User models        | Tanush        | Tanush       |
+| 16  | models.py: Missing User model config     | Tanush        | Tanush       |
+| 17  | MongoDB: Async client errors             | Tanush        | Tanush       |
+| 18  | main.py: Relative import issues          | Tanush        | Tanush       |
+| 19  | main.py: No DB connection lifecycle      | Tanush        | Tanush       |
+| 20  | db.py: Async function implementation     | Dhruv         | Dhruv        |
+| 21  | analytics.py: Incorrect data access      | Keshav        | Keshav       |
+| 22  | analytics.py: Wrong field names          | Keshav        | Keshav       |
+| 23  | analytics.py: Unused image_base64        | Keshav        | Keshav       |
+| 24  | profile.html: userCounts ID mismatch     | Rishabh       | Rishabh      |
+| 25  | profile.js: Missing baseURL variable     | Rishabh       | Rishabh      |
+| 26  | profile.js: Missing user display function| Rishabh       | Rishabh      |
+| 27  | users.py: Incorrect HTTP method          | Rishabh       | Rishabh      |
+| 28  | users.py: Improper deletion logic        | Rishabh       | Rishabh      |
+| 29  | users.py: Missing error handling         | Rishabh       | Rishabh      |
+| 30  | db.py: Client cleanup in exception handler| Dhruv        | Dhruv        |
+
+
+Link to REPO: https://github.com/Tanush-IIITH/ISS_Lab12.git
