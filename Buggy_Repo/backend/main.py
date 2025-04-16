@@ -65,6 +65,9 @@ async def create_user(user: UserCreate):
     # Don't store plain text password in a real app
     # Here you would hash the password
     
+    # Add created_at timestamp
+    user_dict["created_at"] = datetime.now()
+    
     result = await users_collection.insert_one(user_dict)
     created_user = await users_collection.find_one({"_id": result.inserted_id})
     return created_user
@@ -73,6 +76,37 @@ async def create_user(user: UserCreate):
 async def read_users():
     users = await users_collection.find().to_list(1000)
     return users
+
+@app.get("/users/{user_id}", response_model=User)
+async def read_user(user_id: str):
+    if not ObjectId.is_valid(user_id):
+        raise HTTPException(status_code=400, detail="Invalid user ID format")
+        
+    user = await users_collection.find_one({"_id": ObjectId(user_id)})
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return user
+
+@app.patch("/users/{user_id}", response_model=User)
+async def update_user(user_id: str, user_update: dict):
+    if not ObjectId.is_valid(user_id):
+        raise HTTPException(status_code=400, detail="Invalid user ID format")
+    
+    # Don't allow password updates through this endpoint
+    if "password" in user_update:
+        del user_update["password"]
+    
+    user = await users_collection.find_one({"_id": ObjectId(user_id)})
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+        
+    await users_collection.update_one(
+        {"_id": ObjectId(user_id)}, 
+        {"$set": user_update}
+    )
+    
+    updated_user = await users_collection.find_one({"_id": ObjectId(user_id)})
+    return updated_user
 
 if __name__ == "__main__":
     import uvicorn

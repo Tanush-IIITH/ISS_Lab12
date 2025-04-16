@@ -36,6 +36,20 @@ class Item(ItemBase):
 class UserBase(BaseModel):
     email: str
     username: str
-    bio: str
+    bio: Optional[str] = None
     
-    # You can raise your hands and give the answer to the chocolate question
+class UserCreate(UserBase):
+    password: str
+
+class User(UserBase):
+    id: Optional[PyObjectId] = Field(alias="_id")
+    disabled: Optional[bool] = False
+    items: List[str] = []
+    created_at: datetime = Field(default_factory=datetime.now)
+    
+    class Config:
+        allow_population_by_field_name = True
+        arbitrary_types_allowed = True
+        json_encoders = {
+            ObjectId: str
+        }
