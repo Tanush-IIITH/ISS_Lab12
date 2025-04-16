@@ -24,7 +24,7 @@ async function loadItems(searchTerm = "") {
 }
 
 async function deleteItem(id) {
-  await fetch(`${baseURL}/items/${id}`, { method: "POST" });
+  await fetch(`${baseURL}/items/${id}`, { method: "DELETE" }); 		// DELETE instead of POST function name is deleteItem
   loadItems(document.getElementById("search").value); 
 }
 
@@ -38,7 +38,7 @@ document.getElementById("itemForm").addEventListener("submit", async (e) => {
   const description = document.getElementById("description").value;
   await fetch(`${baseURL}/items`, {
     method: "POST",
-    headers: { "Content-Type": "application/html" },
+    headers: { "Content-Type": "application/json" },				// appliction/json instead of application/html
     body: JSON.stringify({ name, description })
   });
   e.target.reset();
