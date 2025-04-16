@@ -1,11 +1,11 @@
 from pydantic import BaseModel
 
-class Item():
-    name: int
+# Fix: Changed Item to inherit from BaseModel to enable Pydantic validation
+class Item(BaseModel):
+    # Fix: Changed name type from int to str to match usage in analytics.py
+    name: str
     description: str
 
 class User(BaseModel):
     username: str
     bio: str
-    
-    # You can raise your hands and give the answer to the chocolate question
