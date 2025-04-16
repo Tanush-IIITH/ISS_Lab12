@@ -1,12 +1,15 @@
 const baseURL = "http://localhost:8000";
-async function loadUsers() {
-  const res = await fetch(`/users`);
-  const users = await res.json();
+
+/**
+ * Renders the user list in the UI
+ * @param {Array} users - List of user objects
+ */
+function renderUsers(users) {
   const list = document.getElementById("userList");
   list.innerHTML = "";
   
   document.getElementById("userCount").textContent = `Total users: ${users.length}`;
-  // why did I give such a weird task
+  
   users.forEach(user => {
     const li = document.createElement("li");
     li.textContent = `${user.username}: ${user.bio}`;
@@ -14,8 +17,15 @@ async function loadUsers() {
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
     deleteBtn.onclick = async () => {
-      await fetch(`${baseURL}/users/${user._id}`, { method: "DELETE" });
-      loadUsers();
+      try {
+        const response = await fetch(`${baseURL}/users/${user._id}`, { method: "DELETE" });
+        if (!response.ok) {
+          throw new Error(`Failed to delete user: ${response.status}`);
+        }
+        loadUsers();
+      } catch (error) {
+        console.error("Error deleting user:", error);
+      }
     };
 
     li.appendChild(deleteBtn);
@@ -23,7 +33,9 @@ async function loadUsers() {
   });
 }
 
-// Load all users in frontend
+/**
+ * Fetches users from the API and updates the UI
+ */
 async function loadUsers() {
   try {
     const response = await fetch(`${baseURL}/users`);
@@ -38,44 +50,66 @@ async function loadUsers() {
   }
 }
 
+/**
+ * Filter users based on search term
+ */
+async function searchUsers(searchTerm) {
+  try {
+    const response = await fetch(`${baseURL}/users`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch users: ${response.status}`);
+    }
+    const users = await response.json();
+    
+    const filteredUsers = users.filter(user => 
+      user.username.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    
+    renderUsers(filteredUsers);
+  } catch (error) {
+    console.error("Error searching users:", error);
+    document.getElementById("userCount").textContent = "Failed to search users";
+  }
+}
 
-document.getElementById("search").addEventListener("input", async (e) => {
-  const term = e.target.value.toLowerCase();
-  const res = await fetch(`${baseURL}/users`);
-  const users = await res.json();
-  const list = document.getElementById("userList");
-  list.innerHTML = "";
+/**
+ * Add a new user
+ */
+async function addUser(username, bio) {
+  try {
+    const response = await fetch(`${baseURL}/users`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, bio })
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Failed to add user: ${response.status}`);
+    }
+    
+    loadUsers();
+  } catch (error) {
+    console.error("Error adding user:", error);
+  }
+}
 
-  const filteredUsers = users.filter(user => user.username.toLowerCase().includes(term));
-  document.getElementById("userCount").textContent = `Total users: ${filteredUsers.length}`;
-
-  filteredUsers.forEach(user => {
-    const li = document.createElement("li");
-    li.textContent = `${user.username}: ${user.bio}`;
-
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Delete";
-    deleteBtn.onclick = async () => {
-      await fetch(`/users/${user._id}`, { method: "DELETE" });
-      loadUsers();
-    };
-
-    li.appendChild(deleteBtn);
-    list.appendChild(li);
-  });
-});
-
-loadUsers();
-
-document.getElementById("userForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const username = document.getElementById("username").value;
-  const bio = document.getElementById("bio").value;
-  await fetch(`/users`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, bio })
-  });
-  e.target.reset();
+// Event Listeners
+document.addEventListener('DOMContentLoaded', () => {
+  // Load users when page loads
   loadUsers();
+  
+  // Set up search functionality
+  document.getElementById("search").addEventListener("input", (e) => {
+    searchUsers(e.target.value);
+  });
+  
+  // Set up form submission
+  document.getElementById("userForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const username = document.getElementById("username").value;
+    const bio = document.getElementById("bio").value;
+    
+    await addUser(username, bio);
+    e.target.reset();
+  });
 });
