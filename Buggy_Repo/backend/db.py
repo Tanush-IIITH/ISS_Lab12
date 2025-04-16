@@ -25,7 +25,7 @@ async def init_db() -> Dict[str, Any]:
         
         # Return collections dictionary
         return {
-            "item_collection": db["item"],
+            "items_collection": db["items"],
             "users_collection": db["users"],
             "_client": client  # Include client for proper cleanup
         }
