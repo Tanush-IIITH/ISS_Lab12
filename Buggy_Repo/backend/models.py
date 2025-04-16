@@ -36,18 +36,6 @@ class Item(ItemBase):
 class UserBase(BaseModel):
     email: str
     username: str
+    bio: str
     
-class UserCreate(UserBase):
-    password: str
-    
-class User(UserBase):
-    id: Optional[PyObjectId] = Field(alias="_id")
-    disabled: Optional[bool] = False
-    items: List[str] = []
-    
-    class Config:
-        allow_population_by_field_name = True
-        arbitrary_types_allowed = True
-        json_encoders = {
-            ObjectId: str
-        }
+    # You can raise your hands and give the answer to the chocolate question
