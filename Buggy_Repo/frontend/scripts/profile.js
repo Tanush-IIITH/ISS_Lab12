@@ -23,7 +23,7 @@ async function loadUsers() {
   });
 }
 
-// Load all users
+// Load all users in frontend
 async function loadUsers() {
   try {
     const response = await fetch(`${baseURL}/users`);
