@@ -36,7 +36,7 @@
 
 | ID  | Issue Description                        | Identified By | Fixed By     |
 |-----|------------------------------------------|---------------|--------------|
-| 1   | Style.css is not filled                  | Narain        | Whole Team   |
+| 1   | Style.css is not filled                  | Tanush        | Tanush   |
 | 2   | quiz.py: Always returning same question  | Tanush        | Tanush       |
 | 3   | quiz.py: HTTP Method Mismatch (GET vs POST) | Tanush     | Arushi       |
 | 4   | quiz.py: Improper parameter extraction   | Tanush        | Arushi       |
@@ -66,6 +66,12 @@
 | 28  | users.py: Improper deletion logic        | Rishabh       | Rishabh      |
 | 29  | users.py: Missing error handling         | Rishabh       | Rishabh      |
 | 30  | db.py: Client cleanup in exception handler| Dhruv        | Dhruv        |
-
+| 31  | items.py: Missing import for init_db     | Keshav        | Keshav       |
+| 32  | items.py: No validation in create_item   | Keshav        | Keshav       |
+| 33  | items.py: No MongoDB conn. error handling| Keshav        | Keshav       |
+| 34  | quiz.py: Missing thread safety           | Arushi        | Arushi       |
+| 35  | quiz.py: Added asyncio.Lock for concurrency| Arushi      | Arushi       |
+| 36  | db.py: Improved function docstring       | Dhruv         | Dhruv        |
+| 37  | db.py: Consistent error handling         | Dhruv         | Dhruv        |
 
 Link to REPO: https://github.com/Tanush-IIITH/ISS_Lab12.git
