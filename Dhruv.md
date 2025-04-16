@@ -1,0 +1,2 @@
+-- Appliction/json instead of application/html
+-- DELETE instead of POST in function name deleteItem
